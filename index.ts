@@ -17,6 +17,14 @@ class ADB {
             y: parseInt(split[1])
         }
     }
+
+    async getScreenshot(dir: string) {
+        await cmd("adb shell screencap -p /sdcard/screen.png");
+        await cmd("adb pull /sdcard/screen.png " + dir);
+        await cmd("adb shell rm /sdcard/screen.png");
+
+        return `${dir}/screen.png`;
+    }
 }
 
 export default ADB;
