@@ -26,6 +26,10 @@ class ADB {
         return `${dir}/screen.png`;
     }
     
+    async startApp(packageName: string) {
+        await cmd(`adb shell monkey -p ${packageName} -c android.intent.category.LAUNCHER 1`);
+    }
+    
     async shell(input: string) {
         return await cmd("adb shell " + input);
     }
