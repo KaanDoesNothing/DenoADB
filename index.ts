@@ -19,10 +19,4 @@ class ADB {
     }
 }
 
-const adb = new ADB();
-
-await adb.waitForConnection();
-
-console.log(await adb.getScreenSize());
-
-// console.log(await new ADB().getScreenSize());
+export default ADB;
