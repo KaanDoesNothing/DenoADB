@@ -25,6 +25,30 @@ class ADB {
 
         return `${dir}/screen.png`;
     }
+    
+    async shell(input: string) {
+        return await cmd("adb shell " + input);
+    }
+
+    async click(x: number, y: number) {
+        await cmd(`adb shell input tap ${x} ${y}`);
+    }
+
+    async back() {
+        await cmd(`adb shell input keyevent KEYCODE_BACK`);
+    }
+
+    async home() {
+        await cmd("adb shell input keyevent KEYCODE_HOME");
+    }
+
+    async menu() {
+        await cmd("adb shell input keyevent KEYCODE_MENU");
+    }
+
+    async reboot() {
+        await cmd("adb reboot");
+    }
 }
 
 export default ADB;
