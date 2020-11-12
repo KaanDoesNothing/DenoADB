@@ -13,4 +13,12 @@ async function cmd(code: any) {
     return finalOutput;
 }
 
-export {cmd};
+async function shell(input: string) {
+    return await cmd("adb shell " + input);
+}
+
+function isTrue(val: string) {
+    return parseInt(val) === 1;
+}
+
+export {cmd, shell, isTrue};

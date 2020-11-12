@@ -1,4 +1,4 @@
-import {cmd} from "./utils.ts";
+import {cmd, shell, isTrue} from "./utils.ts";
 
 class ADB {
     async waitForConnection() {
@@ -6,7 +6,7 @@ class ADB {
     }
 
     async getScreenSize() {
-        const raw: string = await cmd("adb shell wm size");
+        const raw: string = await shell("wm size");
 
         const filtered: string = raw.replace("Physical size: ", "");
 
@@ -25,29 +25,33 @@ class ADB {
 
         return `${dir}/screen.png`;
     }
-    
-    async startApp(packageName: string) {
-        await cmd(`adb shell monkey -p ${packageName} -c android.intent.category.LAUNCHER 1`);
-    }
-    
-    async shell(input: string) {
-        return await cmd("adb shell " + input);
+
+    async getSetting(namespace: string, setting: string) {
+        return await shell(`settings get ${namespace} ${setting}`);
     }
 
+    async getWifiEnabled() {
+        return isTrue(await this.getSetting("global", "wifi_on"));
+    }
+
+    async startApp(packageName: string) {
+        await shell(`monkey -p ${packageName} -c android.intent.category.LAUNCHER 1`);
+    }
+    
     async click(x: number, y: number) {
-        await cmd(`adb shell input tap ${x} ${y}`);
+        await shell(`input tap ${x} ${y}`);
     }
 
     async back() {
-        await cmd(`adb shell input keyevent KEYCODE_BACK`);
+        await shell(`input keyevent KEYCODE_BACK`);
     }
 
     async home() {
-        await cmd("adb shell input keyevent KEYCODE_HOME");
+        await shell("input keyevent KEYCODE_HOME");
     }
 
     async menu() {
-        await cmd("adb shell input keyevent KEYCODE_MENU");
+        await shell("input keyevent KEYCODE_MENU");
     }
 
     async reboot() {
