@@ -13,8 +13,8 @@ class ADB {
         const split: string[] = filtered.trim().split("x");
 
         return {
-            x: split[0],
-            y: split[1]
+            x: parseInt(split[0]),
+            y: parseInt(split[1])
         }
     }
 }
