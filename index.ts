@@ -30,8 +30,24 @@ class ADB {
         return await shell(`settings get ${namespace} ${setting}`);
     }
 
+    async getProp(prop: string) {
+        return await shell("getprop " + prop);
+    }
+
     async getWifiEnabled() {
         return isTrue(await this.getSetting("global", "wifi_on"));
+    }
+
+    async getMobileData() {
+        return isTrue(await this.getSetting("global", "mobile_data"));
+    }
+    
+    async getAirplaneEnabled() {
+        return isTrue(await this.getSetting("global", "airplane_mode_on"));
+    }
+
+    async getCarrier() {
+        return (await this.getProp("gsm.sim.operator.alpha")).replace(",", "").trim();
     }
 
     async startApp(packageName: string) {
