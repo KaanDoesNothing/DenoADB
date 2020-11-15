@@ -38,7 +38,7 @@ class ADB {
         return isTrue(await this.getSetting("global", "wifi_on"));
     }
 
-    async getMobileData() {
+    async getMobileDataEnabled() {
         return isTrue(await this.getSetting("global", "mobile_data"));
     }
     
