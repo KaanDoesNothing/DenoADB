@@ -1,7 +1,25 @@
 class ADB {
+    public adbPath: string;
+
+    constructor() {
+        this.adbPath = "";
+    }
+
+    setADBPath(path: string) {
+        return this.adbPath = path;
+    }
+
     async cmd(code: any) {
+        let splitted = code.split(" ");
+
+        if(splitted[0] === "adb") {
+            if(this.adbPath.length > 0) {
+                splitted[0] = this.adbPath;
+            }
+        }
+
         const execute = Deno.run({
-            cmd: code.split(" "), 
+            cmd: splitted, 
             stdout: "piped",
             stderr: "piped"
         });
