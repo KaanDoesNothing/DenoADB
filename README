@@ -1,5 +1,5 @@
 ADB needs to be installed first for this to work.
 
-
+When using setADBPath Make sure to include the executable like setADBPath("./tools/adb.exe");
 
 Inspired by https://github.com/appium/appium-adb
