@@ -89,6 +89,10 @@ class ADB {
         return (await this.getProp("gsm.sim.operator.alpha")).replace(",", "").trim();
     }
 
+    // async setWifiEnabled(val: boolean) {
+    //     return 
+    // }
+
     async startApp(packageName: string) {
         await this.shell(`monkey -p ${packageName} -c android.intent.category.LAUNCHER 1`);
     }
